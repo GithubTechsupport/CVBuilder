@@ -1,0 +1,750 @@
+/* =====================================================================
+   CV templates. Everything is sized for a 96dpi page (A4 = 794px wide)
+   and in em relative to --fs so the font-size control scales the layout.
+   ===================================================================== */
+
+.cv {
+  position: relative;
+  box-sizing: border-box;
+  background: #fff;
+  color: var(--fg);
+  font-family: var(--font-b);
+  font-size: var(--fs);
+  line-height: var(--lh);
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+  overflow: hidden;
+}
+.cv *,
+.cv *::before,
+.cv *::after {
+  box-sizing: border-box;
+}
+.cv h1,
+.cv h2,
+.cv p,
+.cv ul,
+.cv ol,
+.cv dl,
+.cv dd {
+  margin: 0;
+  padding: 0;
+}
+.cv a {
+  color: inherit;
+  text-decoration: none;
+}
+.cv h1,
+.cv h2 {
+  font-family: var(--font-h);
+}
+
+/* ---------- rich text ---------- */
+.cv .rt p + p,
+.cv .rt p + ul,
+.cv .rt p + ol,
+.cv .rt ul + p,
+.cv .rt ol + p {
+  margin-top: 0.45em;
+}
+.cv .rt ul,
+.cv .rt ol {
+  margin: 0.6em 0 0.35em;
+  padding-left: 1.4em;
+}
+.cv .rt ul {
+  list-style: none;
+}
+.cv .rt ul > li {
+  position: relative;
+}
+.cv .rt ul > li::before {
+  content: '';
+  position: absolute;
+  left: -1.05em;
+  top: calc(var(--lh) * 0.5em - 0.2em);
+  width: 0.36em;
+  height: 0.36em;
+  background: currentColor;
+}
+.cv .rt li + li {
+  margin-top: 0.5em;
+}
+.cv .rt li p + p {
+  margin-top: 0.2em;
+}
+.cv .rt a {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+.cv .rt strong {
+  font-weight: 700;
+}
+
+/* ---------- shared blocks ---------- */
+.cv-photo {
+  overflow: hidden;
+}
+.cv-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cv-photo--circle {
+  border-radius: 50%;
+}
+.cv-photo--rounded {
+  border-radius: 14%;
+}
+
+.cv-name {
+  font-weight: 700;
+  line-height: 1.05;
+}
+.cv-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em 1.1em;
+}
+.cv-contact.is-stacked {
+  flex-direction: column;
+}
+.cv-sep {
+  margin-right: 0.6em;
+  opacity: 0.6;
+}
+
+.cv-entry-head {
+  display: grid;
+  break-inside: avoid;
+  break-after: avoid;
+}
+.cv-entry-title {
+  grid-area: title;
+  font-weight: 700;
+}
+.cv-entry-sub {
+  grid-area: sub;
+}
+.cv-entry-date {
+  grid-area: date;
+}
+.cv-h {
+  break-after: avoid;
+}
+.cv p,
+.cv li {
+  orphans: 2;
+  widows: 2;
+}
+
+.cv-list {
+  list-style: none;
+}
+.cv-list--bullets {
+  columns: 2;
+  column-gap: 2em;
+}
+.cv-list--bullets li {
+  position: relative;
+  padding-left: 1.1em;
+  break-inside: avoid;
+}
+.cv-list--bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0.1em;
+  top: calc(var(--lh) * 0.5em - 0.18em);
+  width: 0.36em;
+  height: 0.36em;
+  background: currentColor;
+}
+.cv-list--tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+}
+.cv-list--tags li {
+  padding: 0.15em 0.7em;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: 0.92em;
+}
+.cv-list--stacked li + li {
+  margin-top: calc(0.55em * var(--sp));
+}
+
+.cv-level-name {
+  display: block;
+}
+.cv-bar {
+  display: block;
+  height: 6px;
+  margin-top: 2px;
+  background: #fff;
+}
+.cv-bar i {
+  display: block;
+  height: 100%;
+  background: #afb1b2;
+}
+.cv-dots {
+  display: flex;
+  gap: 5px;
+  margin-top: 3px;
+}
+.cv-dots i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+}
+.cv-dots i.on {
+  background: currentColor;
+}
+.cv-level + .cv-level {
+  margin-top: calc(0.5em * var(--sp));
+}
+.cv-levels--none .cv-level + .cv-level {
+  margin-top: calc(0.35em * var(--sp));
+}
+
+.cv-details--main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6em 2em;
+}
+.cv-details--main dt {
+  font-weight: 700;
+}
+.cv-detail + .cv-detail {
+  margin-top: 0;
+}
+.cv-details--sidebar .cv-detail + .cv-detail {
+  margin-top: calc(1.1em * var(--sp));
+}
+.cv-main .cv-levels--bar,
+.cv-main .cv-levels--dots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7em 2em;
+}
+.cv-main .cv-level + .cv-level {
+  margin-top: 0;
+}
+.cv-main .cv-bar {
+  background: color-mix(in srgb, var(--fg) 12%, #fff);
+}
+.cv-main .cv-bar i {
+  background: var(--accent);
+}
+
+/* ---------- editing affordances (preview only) ---------- */
+.cv .cv-placeholder {
+  font-style: italic;
+  opacity: 0.45;
+  font-weight: 400;
+}
+.cv.is-editing .cv-sec,
+.cv.is-editing [data-cv-header] {
+  cursor: pointer;
+  border-radius: 3px;
+  transition: outline-color 0.15s;
+  outline: 2px dashed transparent;
+  outline-offset: 3px;
+}
+.cv.is-editing .cv-sec:hover,
+.cv.is-editing [data-cv-header]:hover {
+  outline-color: rgba(59, 108, 246, 0.35);
+}
+.cv.is-editing .cv-sec.is-active {
+  outline-color: rgba(59, 108, 246, 0.9);
+}
+.cv .cv-sec.is-empty .cv-h {
+  opacity: 0.55;
+}
+
+/* =====================================================================
+   Monochrome — the CVEng.pdf template
+   ===================================================================== */
+/* Sidebar background as a solid block (gradients get tiled with seams in Chrome's PDF output). */
+.cv.has-sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: var(--sb-w);
+  background: var(--sb-bg);
+}
+.t-modern.has-sidebar::before {
+  left: auto;
+  right: 0;
+}
+.cv-inner {
+  position: relative;
+}
+.t-monochrome .cv-cols {
+  display: grid;
+  grid-template-columns: var(--sb-w) minmax(0, 1fr);
+  align-items: start;
+}
+.t-monochrome .cv-side {
+  color: var(--sb-fg);
+  min-width: 0;
+}
+.t-monochrome .cv-side > .cv-photo {
+  width: 100%;
+  aspect-ratio: 1;
+}
+.t-monochrome .cv-side > .cv-photo--circle,
+.t-monochrome .cv-side > .cv-photo--rounded {
+  width: calc(100% - 58px);
+  margin: 36px 29px 0;
+}
+.t-monochrome .cv-side-inner {
+  padding: 36px 30px 40px 29px;
+}
+.t-monochrome .cv-name {
+  font-size: 2.31em;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.t-monochrome .cv-first,
+.t-monochrome .cv-last {
+  display: block;
+}
+.t-monochrome .cv-first {
+  font-weight: 300;
+}
+.t-monochrome .cv-headline {
+  margin-top: 0.9em;
+  font-size: 1.15em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.t-monochrome .cv-contact {
+  margin-top: 1em;
+  word-break: break-word;
+}
+.t-monochrome .cv-h {
+  font-size: 1.385em;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+/* sidebar */
+.t-monochrome .cv-side .cv-sec {
+  margin-top: calc(44px * var(--sp));
+}
+.t-monochrome .cv-side .cv-h {
+  margin-bottom: calc(19px * var(--sp));
+}
+.t-monochrome .cv-side .cv-sec-body {
+  padding-left: 4px;
+  overflow-wrap: anywhere;
+}
+.t-monochrome .cv-side .has-line .cv-sec-body {
+  margin-left: 6px;
+  padding-left: 12px;
+  border-left: 1px dashed var(--sb-fg);
+}
+.t-monochrome .cv-side .cv-sec:not(.has-line) .cv-details {
+  font-weight: 700;
+}
+.t-monochrome .cv-side .has-line .cv-details .cv-detail + .cv-detail {
+  margin-top: calc(0.9em * var(--sp));
+}
+.t-monochrome .cv-side .cv-bar {
+  background: var(--sb-fg);
+}
+.t-monochrome .cv-side .cv-bar i {
+  background: color-mix(in srgb, var(--sb-fg) 62%, var(--sb-bg));
+}
+.t-monochrome .cv-side .cv-level + .cv-level {
+  margin-top: calc(0.45em * var(--sp));
+}
+.t-monochrome .cv-side .cv-entry + .cv-entry {
+  margin-top: calc(0.9em * var(--sp));
+}
+.t-monochrome .cv-side .cv-entry-head {
+  grid-template-areas: 'title' 'sub' 'date';
+}
+.t-monochrome .cv-side .cv-entry-title {
+  text-transform: uppercase;
+}
+.t-monochrome .cv-side .cv-list--tags li {
+  border-color: color-mix(in srgb, var(--sb-fg) 50%, transparent);
+}
+/* main */
+.t-monochrome .cv-main {
+  padding: 31px 0 36px 31px;
+  min-width: 0;
+}
+/* Bottom padding is a little under the top padding so the divider sits midway between the last
+   line of text and the next heading (the heading's line box adds less space above its glyphs). */
+.t-monochrome .cv-main .cv-sec {
+  padding: calc(30px * var(--sp)) 34px calc(28px * var(--sp)) 0;
+  border-bottom: 1px solid var(--fg);
+}
+.t-monochrome .cv-main .cv-sec:first-child {
+  padding-top: 0;
+}
+.t-monochrome .cv-main .cv-sec:last-child {
+  padding-bottom: calc(14px * var(--sp));
+  border-bottom: 0;
+}
+/* Small square bullets flush with the text column, as in CVEng.pdf. The square is scaled down
+   from 1em rather than sized directly: a transformed box isn't snapped to whole pixels, so every
+   bullet renders at the same size. */
+.t-monochrome .rt ul {
+  padding-left: 1em;
+}
+.t-monochrome .rt ul > li::before {
+  left: -0.94em;
+  top: calc(var(--lh) * 0.5em - 0.1em);
+  width: 1em;
+  height: 1em;
+  transform: scale(0.27);
+  transform-origin: 0 0;
+}
+.t-monochrome .cv-main .cv-h {
+  margin-bottom: calc(14px * var(--sp));
+}
+.t-monochrome .cv-main .cv-entry + .cv-entry {
+  margin-top: calc(22px * var(--sp));
+}
+.t-monochrome .cv-main .cv-entry-head {
+  grid-template-areas: 'title' 'sub' 'date';
+  text-transform: uppercase;
+}
+.t-monochrome .cv-main .cv-entry-title {
+  line-height: 1.25;
+  letter-spacing: 0.07em;
+}
+.t-monochrome .cv-main .cv-entry-sub,
+.t-monochrome .cv-main .cv-entry-date {
+  letter-spacing: 0.12em;
+}
+.t-monochrome .cv-main .cv-entry-sub {
+  margin-top: 0.2em;
+}
+.t-monochrome .cv-main .cv-entry-desc {
+  margin-top: 0.65em;
+  padding-left: 3px;
+}
+.t-monochrome.is-paged .cv-main,
+.t-monochrome.is-paged .cv-side-inner {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* =====================================================================
+   Modern — colour band header, light sidebar on the right
+   ===================================================================== */
+.t-modern .cv-inner {
+  display: flex;
+  flex-direction: column;
+}
+.t-modern .cv-band {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 38px 40px;
+  background: var(--accent);
+  color: #fff;
+}
+.t-modern .cv-band .cv-photo {
+  flex: none;
+  width: 116px;
+  height: 116px;
+  border: 3px solid rgba(255, 255, 255, 0.85);
+}
+.t-modern .cv-name {
+  font-size: 2.6em;
+  letter-spacing: 0.01em;
+}
+.t-modern .cv-headline {
+  margin-top: 0.35em;
+  font-family: var(--font-h);
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+.t-modern .cv-contact {
+  margin-top: 0.9em;
+  font-size: 0.95em;
+  opacity: 0.95;
+}
+.t-modern .cv-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) var(--sb-w);
+  align-items: start;
+}
+.t-modern .cv-main {
+  padding: 30px 32px 36px 40px;
+}
+.t-modern .cv-side {
+  padding: 30px 28px 36px 26px;
+  color: var(--sb-fg);
+  overflow-wrap: anywhere;
+}
+.t-modern .cv-sec + .cv-sec {
+  margin-top: calc(24px * var(--sp));
+}
+.t-modern .cv-h {
+  position: relative;
+  margin-bottom: calc(12px * var(--sp));
+  padding-bottom: 7px;
+  font-size: 1.12em;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.t-modern .cv-h::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 30px;
+  height: 3px;
+  background: var(--accent);
+}
+.t-modern .cv-entry + .cv-entry {
+  margin-top: calc(16px * var(--sp));
+}
+.t-modern .cv-main .cv-entry-head {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'title date' 'sub sub';
+  column-gap: 1em;
+}
+.t-modern .cv-entry-title {
+  font-family: var(--font-h);
+  font-size: 1.05em;
+}
+.t-modern .cv-entry-sub {
+  color: var(--accent);
+  font-weight: 600;
+}
+.t-modern .cv-entry-date {
+  font-size: 0.92em;
+  opacity: 0.7;
+  white-space: nowrap;
+  padding-top: 0.1em;
+}
+.t-modern .cv-entry-desc {
+  margin-top: 0.4em;
+}
+.t-modern .cv-side .cv-entry-head {
+  grid-template-areas: 'title' 'sub' 'date';
+}
+.t-modern .cv-side .cv-entry-sub {
+  font-weight: 400;
+}
+.t-modern .cv-rt ul > li::before,
+.t-modern .rt ul > li::before {
+  background: var(--accent);
+  border-radius: 50%;
+}
+.t-modern .cv-side dt {
+  font-size: 0.85em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+.t-modern .cv-bar,
+.t-modern .cv-side .cv-bar {
+  background: color-mix(in srgb, var(--accent) 16%, #fff);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.t-modern .cv-bar i {
+  background: var(--accent);
+}
+.t-modern .cv-dots i {
+  color: var(--accent);
+}
+.t-modern .has-line .cv-sec-body {
+  border-left: 2px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding-left: 12px;
+}
+.t-modern.is-paged .cv-main,
+.t-modern.is-paged .cv-side {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* =====================================================================
+   Classic — centred serif header, single column
+   ===================================================================== */
+.t-classic .cv-inner {
+  padding: 54px 64px 56px;
+}
+.t-classic.is-paged .cv-inner {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.t-classic .cv-head {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.t-classic .cv-head .cv-photo {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 16px;
+}
+.t-classic .cv-name {
+  font-size: 2.45em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.t-classic .cv-headline {
+  margin-top: 0.3em;
+  font-size: 1.15em;
+  font-style: italic;
+}
+.t-classic .cv-contact {
+  justify-content: center;
+  margin-top: 0.6em;
+  gap: 0.2em 0.6em;
+}
+.t-classic .cv-sec {
+  margin-top: calc(22px * var(--sp));
+}
+.t-classic .cv-h {
+  margin-bottom: calc(10px * var(--sp));
+  padding-bottom: 3px;
+  border-bottom: 1px solid var(--accent);
+  color: var(--accent);
+  font-size: 1.08em;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.t-classic .cv-entry + .cv-entry {
+  margin-top: calc(13px * var(--sp));
+}
+.t-classic .cv-entry-head {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'title date' 'sub sub';
+  column-gap: 1em;
+}
+.t-classic .cv-entry-title {
+  font-size: 1.05em;
+}
+.t-classic .cv-entry-sub,
+.t-classic .cv-entry-date {
+  font-style: italic;
+}
+.t-classic .cv-entry-desc {
+  margin-top: 0.25em;
+}
+.t-classic .rt ul > li::before {
+  border-radius: 50%;
+  width: 0.3em;
+  height: 0.3em;
+}
+.t-classic .cv-bar {
+  background: #e6e6e6;
+}
+.t-classic .cv-bar i {
+  background: var(--accent);
+}
+
+/* =====================================================================
+   Swiss — headings in a left gutter
+   ===================================================================== */
+.t-swiss .cv-inner {
+  padding: 52px 52px 56px;
+}
+.t-swiss.is-paged .cv-inner {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.t-swiss .cv-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 26px;
+}
+.t-swiss .cv-head .cv-photo {
+  flex: none;
+  width: 96px;
+  height: 96px;
+}
+.t-swiss .cv-name {
+  font-size: 2.9em;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+.t-swiss .cv-headline {
+  margin-top: 0.25em;
+  font-size: 1.25em;
+  font-weight: 500;
+  color: var(--accent);
+}
+.t-swiss .cv-contact {
+  margin-top: 0.7em;
+  font-size: 0.95em;
+  opacity: 0.75;
+}
+.t-swiss .cv-sec {
+  display: grid;
+  grid-template-columns: 130px minmax(0, 1fr);
+  column-gap: 24px;
+  padding-top: calc(14px * var(--sp));
+  margin-top: calc(14px * var(--sp));
+  border-top: 1px solid color-mix(in srgb, var(--fg) 14%, #fff);
+}
+.t-swiss .cv-h {
+  padding-top: 0.2em;
+  font-size: 0.85em;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.t-swiss .cv-entry + .cv-entry {
+  margin-top: calc(14px * var(--sp));
+}
+.t-swiss .cv-entry-head {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: 'title date' 'sub sub';
+  column-gap: 1em;
+}
+.t-swiss .cv-entry-title {
+  font-weight: 600;
+}
+.t-swiss .cv-entry-sub,
+.t-swiss .cv-entry-date {
+  opacity: 0.65;
+}
+.t-swiss .cv-entry-date {
+  font-size: 0.92em;
+  white-space: nowrap;
+  padding-top: 0.08em;
+}
+.t-swiss .cv-entry-desc {
+  margin-top: 0.3em;
+}
+.t-swiss .rt ul > li::before {
+  background: var(--accent);
+}
+.t-swiss .cv-bar {
+  background: color-mix(in srgb, var(--fg) 10%, #fff);
+}
+.t-swiss .cv-bar i {
+  background: var(--accent);
+}

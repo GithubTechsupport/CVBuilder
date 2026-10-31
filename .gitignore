@@ -1,0 +1,11 @@
+node_modules
+dist
+*.tmp
+*.tsbuildinfo
+
+# Saved CVs contain personal data and stay on this machine
+data
+
+# Personal files: original CV PDFs and the optional seed headshot
+*.pdf
+server/seed/headshot.jpg
